@@ -3,7 +3,10 @@
 ### My goals:
 Use a Arduino UNO board to receive MIDI data over USB and use it to control a WS2812B individually adressable LED strip.
 
-### To Do
+### MIDI format:
+![alt text](https://github.com/rafaelpelle/arduino-midi/blob/master/midi-format.png?raw=true)
+
+### To Do:
 - [x] Receive MIDI data over USB;
 - [x] MIDI "Note on" (command byte) recognition;
 - [x] MIDI "Note off" (command byte) recognition;
