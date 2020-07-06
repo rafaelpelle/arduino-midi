@@ -5,11 +5,11 @@ LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 const byte NOTE_ON = 144;
 const byte NOTE_OFF = 128;
 const int ARRAY_SIZE = 10;
+const int ARRAY_HALF_SIZE = ARRAY_SIZE / 2;
 byte commandByte;
 byte noteByte;
 byte velocityByte;
 int pressedNotes[ARRAY_SIZE];
-
 
 
 void resetPressedNotes() {
@@ -37,16 +37,22 @@ void removeNote(byte note) {
 }
 
 void updateDisplay() {
-  String displayText = "";
-  for (int i = 0; i < ARRAY_SIZE; i++) {
+  String displayLine1 = "";
+  for (int i = 0; i < ARRAY_HALF_SIZE; i++) {
     if (pressedNotes[i] >= 0) {
-      displayText = displayText + pressedNotes[i] + ", ";
+      displayLine1 = displayLine1 + pressedNotes[i] + " ";
+    }
+  }
+  String displayLine2 = "";
+  for (int i = ARRAY_HALF_SIZE; i < ARRAY_SIZE; i++) {
+    if (pressedNotes[i] >= 0) {
+      displayLine2 = displayLine2 + pressedNotes[i] + " ";
     }
   }
   lcd.clear();
-  lcd.print(displayText);
-  //  lcd.setCursor (0, 1);
-  //  lcd.print((String)"Velocidade: " + velocityByte);
+  lcd.print(displayLine1);
+  lcd.setCursor (0, 1);
+  lcd.print(displayLine2);
 }
 
 void setup() {
